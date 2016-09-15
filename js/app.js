@@ -37,6 +37,11 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { homeReducer } from './reducers/reducers';
 import FontFaceObserver from 'fontfaceobserver';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Add event listener on touch/tap for material-ui
+injectTapEventPlugin();
+
 
 // When Open Sans is loaded, add the js-open-sans-loaded class to the body
 // which swaps out the fonts

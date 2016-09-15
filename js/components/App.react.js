@@ -12,13 +12,30 @@ import Nav from './Nav.react';
 import { connect } from 'react-redux';
 import auth from '../utils/auth';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Appbar from 'material-ui/AppBar';
+import {deepOrange500} from 'material-ui/styles/colors';
+import * as mui from 'material-ui';
+
+
+// setting up material color
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: deepOrange500,
+  },
+});
+
 class App extends Component {
+ 
   render() {
     return(
+    <MuiThemeProvider muiTheme={muiTheme}>
       <div className="wrapper">
         <Nav loggedIn={this.props.data.loggedIn} history={this.props.history} location={this.props.location} dispatch={this.props.dispatch} currentlySending={this.props.data.currentlySending} />
         { this.props.children }
       </div>
+      </MuiThemeProvider>
     )
   }
 }
