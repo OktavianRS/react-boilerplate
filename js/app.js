@@ -72,27 +72,13 @@ const store = createStoreWithMiddleware(homeReducer);
 
 function checkAuth(nextState, replaceState) {
   let { loggedIn } = store.getState();
-
   // check if the path isn't dashboard
   // that way we can apply specific logic
   // to display/render the path we want to
-  if (nextState.location.pathname !== '/dashboard') {
-    if (loggedIn) {
-      if (nextState.location.state && nextState.location.pathname) {
-        replaceState(null, nextState.location.pathname);
-      } else {
-        replaceState(null, '/');
-      }
-    }
+  if (loggedIn) {
+    replaceState(null, '/dashboard');
   } else {
-    // If the user is already logged in, forward them to the homepage
-    if (!loggedIn) {
-      if (nextState.location.state && nextState.location.pathname) {
-        replaceState(null, nextState.location.pathname);
-      } else {
-        replaceState(null, '/');
-      }
-    }
+    replaceState(null, '/login');
   }
 }
 
@@ -103,11 +89,9 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route component={App}>
         <Route path="/" component={HomePage} />
-        <Route onEnter={checkAuth}>
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
-          <Route path="/dashboard" component={Dashboard} />
-        </Route>
+          <Route path="/dashboard" component={Dashboard} onEnter={checkAuth}/>
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
