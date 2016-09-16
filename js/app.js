@@ -75,9 +75,7 @@ function checkAuth(nextState, replaceState) {
   // check if the path isn't dashboard
   // that way we can apply specific logic
   // to display/render the path we want to
-  if (loggedIn) {
-    replaceState(null, '/dashboard');
-  } else {
+  if (!loggedIn) {
     replaceState(null, '/login');
   }
 }
@@ -88,10 +86,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route component={App}>
-        <Route path="/" component={HomePage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/dashboard" component={Dashboard} onEnter={checkAuth}/>
+        <Route path="/" component={HomePage} onEnter={checkAuth}/>
+          <Route path="/login" component={LoginPage}/>
+          <Route path="/register" component={RegisterPage}/>
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

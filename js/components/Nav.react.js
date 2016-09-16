@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { logout } from '../actions/AppActions';
 import LoadingButton from './LoadingButton.react';
+import FlatButton from 'material-ui/FlatButton';
 
 class Nav extends Component {
   render() {
@@ -17,11 +18,11 @@ class Nav extends Component {
     // based on the current authentication state.
     const navButtons = this.props.loggedIn ? (
         <div>
-          <Link to="/dashboard" className="btn btn--dash btn--nav">Dashboard</Link>
+          <Link to="/" className="btn btn--dash btn--nav">Dashboard</Link>
           {this.props.currentlySending ? (
             <LoadingButton className="btn--nav" />
           ) : (
-            <a href="#" className="btn btn--login btn--nav" onClick={::this._logout}>Logout</a>
+            <FlatButton label="Logout" onClick={::this._logout}/>
           )}
         </div>
       ) : (
