@@ -10,40 +10,31 @@
  *   });
  */
 
-import { CHANGE_FORM, SET_AUTH, SENDING_REQUEST } from '../constants/AppConstants';
+import { CHANGE_CODE, LOG_USER, RECEIVE_ACCESS_TOKEN } from '../constants/AuthConstants';
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
 const assign = Object.assign || require('object.assign');
-import auth from '../utils/auth';
 
 // The initial application state
 const initialState = {
-  formState: {
-    username: '',
-    password: ''
+  authForm: {
+    code: ''
   },
-  currentlySending: false,
-  loggedIn: auth.loggedIn()
+  accessToken: null
 };
 
 // Takes care of changing the application state
 export function homeReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_FORM:
+    case CHANGE_CODE:
       return assign({}, state, {
-        formState: action.newState
+        authForm: action.newState
       });
       break;
-    case SET_AUTH:
-      return assign({}, state, {
-        loggedIn: action.newState
-      });
-      break;
-    case SENDING_REQUEST:
-      return assign({}, state, {
-        currentlySending: action.sending
-      });
-      break;
+      case RECEIVE_ACCESS_TOKEN:
+        return Object.assign({}, state, {
+          accessToken: action.accessToken,
+        });
     default:
       return state;
   }

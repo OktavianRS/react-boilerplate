@@ -35,7 +35,7 @@ import thunk from 'redux-thunk';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { homeReducer } from './reducers/reducers';
+import { homeReducer } from './reducers/auth';
 import FontFaceObserver from 'fontfaceobserver';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -54,12 +54,8 @@ openSansObserver.check().then(() => {
 });
 
 // Import the components used as pages
-import HomePage from './components/pages/HomePage.react';
-import LoginPage from './components/pages/LoginPage.react';
-import RegisterPage from './components/pages/RegisterPage.react';
-import Dashboard from './components/pages/Dashboard.react';
-import NotFound from './components/pages/NotFound.react';
 import App from './components/App.react';
+import AuthCode from './containers/AuthCodePage';
 
 // Import the CSS file, which webpack transfers to the build folder
 import '../css/main.css';
@@ -71,12 +67,12 @@ const store = createStoreWithMiddleware(homeReducer);
 
 
 function checkAuth(nextState, replaceState) {
-  let { loggedIn } = store.getState();
+  let { accessToken } = store.getState();
   // check if the path isn't dashboard
   // that way we can apply specific logic
   // to display/render the path we want to
-  if (!loggedIn) {
-    replaceState(null, '/login');
+  if (!accessToken) {
+    replaceState(null, '/auth');
   }
 }
 
@@ -86,10 +82,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route component={App}>
-        <Route path="/" component={HomePage} onEnter={checkAuth}/>
-          <Route path="/login" component={LoginPage}/>
-          <Route path="/register" component={RegisterPage}/>
-        <Route path="*" component={NotFound} />
+        <Route path="/auth" component={AuthCode}/>
       </Route>
     </Router>
   </Provider>,

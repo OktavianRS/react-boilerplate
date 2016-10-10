@@ -8,9 +8,7 @@
 
 // Import stuff
 import React, { Component } from 'react';
-import Nav from './Nav.react';
 import { connect } from 'react-redux';
-import auth from '../utils/auth';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -32,7 +30,6 @@ class App extends Component {
     return(
     <MuiThemeProvider muiTheme={muiTheme}>
       <div className="wrapper">
-        <Nav loggedIn={this.props.data.loggedIn} history={this.props.history} location={this.props.location} dispatch={this.props.dispatch} currentlySending={this.props.data.currentlySending} />
         { this.props.children }
       </div>
       </MuiThemeProvider>

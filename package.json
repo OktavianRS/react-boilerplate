@@ -3,6 +3,7 @@
   "version": "2.3.0",
   "description": "Quick setup for new React.js applications featuring Redux, hot–reloading, PostCSS, react-router and Mocha.",
   "dependencies": {
+    "axios": "^0.14.0",
     "bcryptjs": "2.3.0",
     "fontfaceobserver": "^1.5.1",
     "material-ui": "^0.15.4",
@@ -48,7 +49,8 @@
   },
   "scripts": {
     "start": "NODE_ENV=development node server.js",
-    "build": "NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors -p"
+    "build": "NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors -p",
+    "postinstall": "npm run build:clean"
   },
   "author": "Max Stoiber",
   "license": "MIT"
