@@ -10,31 +10,29 @@
  *   });
  */
 
-import { CHANGE_CODE, LOG_USER, RECEIVE_ACCESS_TOKEN } from '../constants/AuthConstants';
+import { SET_JSON, CHANGE_TEXT_FIELD } from '../constants/ClientRegistrationConstants';
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
 const assign = Object.assign || require('object.assign');
 
 // The initial application state
 const initialState = {
-  authForm: {
-    code: ''
-  },
-  accessToken: null
+    items: []
 };
 
 // Takes care of changing the application state
-export default function auth(state = initialState, action) {
+export default function json(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_CODE:
+    case SET_JSON:
       return assign({}, state, {
-        authForm: action.newState
+        items: action.newState
       });
       break;
-      case RECEIVE_ACCESS_TOKEN:
-        return Object.assign({}, state, {
-          accessToken: action.accessToken,
-        });
+    case CHANGE_TEXT_FIELD:
+      return assign({}, state, {
+        items: action.newState
+      });
+      break;
     default:
       return state;
   }

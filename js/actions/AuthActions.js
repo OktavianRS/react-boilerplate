@@ -53,6 +53,11 @@ export function logUser(code) {
 		dispatch(fetchAuthedUser(code));
 }
 
+/**
+ * Send request to login user
+ * Log user 
+ * @param  {object} authToken
+ */
 function fetchAuthedUser(authToken) {
 	return dispatch =>
 		axios.get('/user?ID=12345')
@@ -66,6 +71,11 @@ function fetchAuthedUser(authToken) {
 		  });
 }
 
+/**
+ * Stores user auth token
+ * Store user 
+ * @param  {object} authToken
+ */
 function receiveAccessToken(accessToken) {
   return {
     type: RECEIVE_ACCESS_TOKEN,
@@ -73,6 +83,11 @@ function receiveAccessToken(accessToken) {
   };
 }
 
+/**
+ * Stores user auth token in localstorage
+ * Store user in localstorage
+ * @param  {object} authToken
+ */
 function storeSession(accessToken) {
 	localStorage.token = JSON.stringify(accessToken);
 }

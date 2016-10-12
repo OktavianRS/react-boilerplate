@@ -8,12 +8,21 @@
 
 import React, { Component} from 'react';
 
-
 /**
  * Big logo image
  * @param  {string} Path to image
  * @return {number} max-height css param in pixels
  */
+
+const propTypes = {
+	maxHeight: React.PropTypes.number,
+	path: React.PropTypes.string.isRequired,
+}
+
+const defaultProps = {
+	maxHeight: 230,
+}
+
 class BigLogo extends Component {
 	render() {
 		const imgStyle = {
@@ -26,14 +35,9 @@ class BigLogo extends Component {
 }
 
 // Specifies the default values for props:
-BigLogo.defaultProps = {
-  maxHeight: 230,
-};
+BigLogo.defaultProps = defaultProps;
 
 // Specifies the type of value for props:
-BigLogo.propTypes = {
-  maxHeight: React.PropTypes.number,
-  path: React.PropTypes.string.isRequired
-}
+BigLogo.propTypes = propTypes;
 
 export default BigLogo;
