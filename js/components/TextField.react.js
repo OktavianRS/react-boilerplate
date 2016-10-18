@@ -7,6 +7,7 @@
 
 import React, { Component} from 'react';
 import { changeCode, logUser } from '../actions/AuthActions';
+import { Field } from 'redux-form';
 
 // Material UI
 import TextField from 'material-ui/TextField';
@@ -29,24 +30,24 @@ const defaultProps = {
 }
 
 class Textfield extends Component {
+
+	renderTextField ({ input, label, meta: { touched, error }, ...custom }) {
+		let props = custom.config.props;
+		let config = custom.config.config;
+		return (
+			<TextField hintText={props.helpText}
+				floatingLabelText={props.title}
+				{...input}
+			/>
+		)
+	}
+
 	render() {
-		const props = this.props.config.props;
-		const config = this.props.config.config;
+		const config = this.props.config;
+
 		return(
 			<div>
-				<TextField
-					floatingLabelText={props.title || ""}
-					floatingLabelFixed={true}
-					placeholder={props.helpText}
-					multiLine={this.props.multiline}
-					value={this.props.config.value}
-					onChange={this.props.handle.bind(this)}
-					type={config.type || "text"}
-					name={props.title}
-					id={this.props.unique + ''}
-					key={this.props.unique}
-					errorText={config.required ? 'This field is required' : false}
-				/>
+				<Field name={config.props.title} config={config} component={this.renderTextField}/>
 			</div>
 		)
 	}
