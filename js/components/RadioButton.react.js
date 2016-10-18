@@ -18,13 +18,24 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 class Radiobutton extends Component {
 	render() {
+		const props = this.props.config.props;
+		const config = this.props.config.config;
+		const options = this.props.config.options;
+		const radiobuttons = [];
+		if(options.length) {
+			options.map((v, k) => {
+				radiobuttons.push(<RadioButton
+										key={k}
+										label={v.value}
+								/>);
+			})
+		}
 		return(
 			<div>
+				<div className="lable-text">{props.title}</div>
+				<span className="hint-text">{props.helpText}</span>
 				<RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
-					<RadioButton
-						value="light"
-						label="Simple"
-					/>
+					{radiobuttons}
 				</RadioButtonGroup>
 			</div>
 		)

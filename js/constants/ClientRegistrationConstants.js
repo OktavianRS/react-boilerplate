@@ -10,3 +10,4 @@
 export const GET_JSON = 'GET_JSON';
 export const SET_JSON = 'SET_JSON';
 export const CHANGE_TEXT_FIELD = 'CHANGE_TEXT_FIELD';
+export const CHANGE_CHECKBOX = 'CHANGE_CHECKBOX';

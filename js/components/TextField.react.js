@@ -21,7 +21,7 @@ const assign = Object.assign || require('object.assign');
 
 const propTypes = {
 	multiline: React.PropTypes.bool,
-	key: React.PropTypes.number,
+	key: React.PropTypes.number
 }
 
 const defaultProps = {
@@ -34,15 +34,18 @@ class Textfield extends Component {
 		const config = this.props.config.config;
 		return(
 			<div>
-				<span>{props.title}</span>
-				<br/>
 				<TextField
-					floatingLabelText={props.helpText || ""}
+					floatingLabelText={props.title || ""}
 					floatingLabelFixed={true}
-					hintText={config.placeholder || ""}
+					placeholder={props.helpText}
 					multiLine={this.props.multiline}
+					value={this.props.config.value}
+					onChange={this.props.handle.bind(this)}
 					type={config.type || "text"}
-					key={this.props.key}
+					name={props.title}
+					id={this.props.unique + ''}
+					key={this.props.unique}
+					errorText={config.required ? 'This field is required' : false}
 				/>
 			</div>
 		)

@@ -28,7 +28,8 @@
 import { 
 	GET_JSON,
 	SET_JSON,
-	CHANGE_TEXT_FIELD
+	CHANGE_TEXT_FIELD,
+	CHANGE_CHECKBOX,
 	} from '../constants/ClientRegistrationConstants';
 import { browserHistory } from 'react-router';
 import axios from 'axios';
@@ -74,4 +75,14 @@ function receiveJSON(json) {
  */
 export function changeTextField(newState) {
   return { type: CHANGE_TEXT_FIELD, newState };
+}
+
+/**
+ * Sets the Checkbox state
+ * @param  {object} newState The new state of the code
+ * @param  {string} newState.value The new text of the input field
+ * @param  {string} newState.key The key of the input field
+ */
+export function changeCheckbox(newState) {
+	return { type: CHANGE_CHECKBOX, newState };
 }

@@ -10,7 +10,7 @@
  *   });
  */
 
-import { SET_JSON, CHANGE_TEXT_FIELD } from '../constants/ClientRegistrationConstants';
+import { SET_JSON, CHANGE_TEXT_FIELD, CHANGE_CHECKBOX } from '../constants/ClientRegistrationConstants';
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
 const assign = Object.assign || require('object.assign');
@@ -29,6 +29,11 @@ export default function json(state = initialState, action) {
       });
       break;
     case CHANGE_TEXT_FIELD:
+      return assign({}, state, {
+        items: action.newState
+      });
+      break;
+    case CHANGE_CHECKBOX:
       return assign({}, state, {
         items: action.newState
       });
