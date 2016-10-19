@@ -17,7 +17,9 @@ const assign = Object.assign || require('object.assign');
 
 // The initial application state
 const initialState = {
-    items: []
+    items: [],
+    initialValues: {},
+    requiredFields: [],
 };
 
 // Takes care of changing the application state
@@ -25,8 +27,8 @@ export default function json(state = initialState, action) {
   switch (action.type) {
     case SET_JSON:
       return assign({}, state, {
-        items: action.newState
-      });
+        items: action.newState.json
+      }, {requiredFields: action.newState.requiredFields});
       break;
     case CHANGE_TEXT_FIELD:
       return assign({}, state, {

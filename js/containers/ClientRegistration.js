@@ -20,6 +20,22 @@ import { reduxForm } from 'redux-form';
 // a polyfill
 const assign = Object.assign || require('object.assign');
 
+var initialValues = {};
+var requiredFields = [];
+
+const validate = values => {
+  const errors = {}
+  requiredFields.forEach(field => {
+    if (!values[ field ]) {
+      errors[ field ] = 'Required'
+    }
+  })
+  if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+  return errors
+}
+
 export default class ClientRegistration extends Component {
 
 	componentWillMount() {
@@ -72,21 +88,26 @@ export default class ClientRegistration extends Component {
 
 // Which props do we want to inject, given the global state?
 function select(state) {
-	let initialValues = {Title: 'values'};
+	requiredFields = state.json.requiredFields;
 	state.json.items.map((v, k) => {
 		initialValues[v.props.title] = v.value;
 	})
-	console.log(this);
+
 	return {
 		data: state,
 		initialValues,
 	};
+
 }
 
 // Decorate the form component
 ClientRegistration = reduxForm({
-  form: 'registration' // a unique name for this form
-})(ClientRegistration);
+  form: 'registration', // a unique name for this form
+  validate
+},{
+	enableReinitialize: true
+}
+)(ClientRegistration);
 
 
 

@@ -61,9 +61,16 @@ function fetchJSON() {
 }
 
 function receiveJSON(json) {
+let requiredFields = [];
+json.map((v, k) => {
+		v.config.required ? requiredFields.push(v.props.title) : null;
+	})
   return {
     type: SET_JSON,
-    newState: json,
+    newState: {
+    	json,
+    	requiredFields,
+    },
   };
 }
 

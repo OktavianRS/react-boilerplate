@@ -6,6 +6,7 @@
  */
 
 import React, { Component} from 'react';
+import { Field } from 'redux-form';
 
 // Material UI
 import Checkbox from 'material-ui/Checkbox';
@@ -17,20 +18,25 @@ import Checkbox from 'material-ui/Checkbox';
 
 
 class CheckBox extends Component {
+
+renderCheckbox ({ input, label, ...custom }) {
+	console.log(input);
+	return(
+		<Checkbox label={label}
+			checked={input.value ? true : false}
+			/>
+	)
+}
+
 	render() {
 		const props = this.props.config.props;
 		const config = this.props.config.config;
 		const options = this.props.config.options;
 		const checkboxes = [];
-		if(options.length) {
-			options.map((v, k) => {
-				checkboxes.push(<Checkbox label={v.value}
-										  checked={v.selected}
-										  onCheck={this.props.handle.bind(this, k, this.props.unique, v.selected)} 
-										  key={k}
-								/>);
-			})
-		}
+		console.log(this.props.config);
+		options.map((v,k) => {
+			checkboxes.push(<Field name={v.value} key={k} component={this.renderCheckbox} label={v.value}/>)
+		})
 
 		return(
 			<div>

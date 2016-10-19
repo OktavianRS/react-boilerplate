@@ -37,6 +37,9 @@ class Textfield extends Component {
 		return (
 			<TextField hintText={props.helpText}
 				floatingLabelText={props.title}
+				type={config.type}
+				multiLine={custom.multiline || false}
+				errorText={touched && error}
 				{...input}
 			/>
 		)
@@ -47,7 +50,11 @@ class Textfield extends Component {
 
 		return(
 			<div>
-				<Field name={config.props.title} config={config} component={this.renderTextField}/>
+				<Field 
+					 name={config.props.title}
+					 multiline={this.props.multiline} 
+					 config={config} 
+					 component={this.renderTextField}/>
 			</div>
 		)
 	}
