@@ -38,7 +38,7 @@ class Radiobutton extends Component {
 			<div>
 				<div className="lable-text">{props.title}</div>
 				<span className="hint-text">{props.helpText}</span>
-				<Field name={props.title} value={this.props.config.value} component={this.renderRadioGroup}>
+				<Field name={props.name} value={this.props.config.value} component={this.renderRadioGroup}>
 					{buttons}
 				</Field>
 			</div>

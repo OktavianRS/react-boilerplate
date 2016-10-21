@@ -51,7 +51,7 @@ class Textfield extends Component {
 		return(
 			<div>
 				<Field 
-					 name={config.props.title}
+					 name={config.props.name}
 					 multiline={this.props.multiline} 
 					 config={config} 
 					 component={this.renderTextField}/>

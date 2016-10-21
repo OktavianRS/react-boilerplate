@@ -13,6 +13,7 @@ import { getJSON, changeTextField, changeCheckbox } from '../actions/ClientRegis
 import CheckBox from '../components/Checkbox.react';
 import Radiobutton from '../components/RadioButton.react';
 import Textfield from '../components/TextField.react';
+import Submit from '../components/Submit.react';
 import { reduxForm } from 'redux-form';
 
 
@@ -66,6 +67,9 @@ export default class ClientRegistration extends Component {
 		    case 'textarea':
 		      return <Textfield config={value} key={key} multiline={true}/>
 		      break;
+		    case 'submit':
+		      return <Submit config={value} key={key}/>
+		      break;
 		    default:
 		      return null;
 		  }
@@ -90,7 +94,9 @@ export default class ClientRegistration extends Component {
 function select(state) {
 	requiredFields = state.json.requiredFields;
 	state.json.items.map((v, k) => {
-		initialValues[v.props.title] = v.value;
+		if(v.props.title && v.value) {
+			initialValues[v.props.name] = v.value;
+		}
 	})
 
 	return {

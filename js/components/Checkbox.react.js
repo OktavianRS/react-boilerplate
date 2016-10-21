@@ -19,11 +19,12 @@ import Checkbox from 'material-ui/Checkbox';
 
 class CheckBox extends Component {
 
-renderCheckbox ({ input, label, ...custom }) {
+renderCheckbox ({ input, label, ...custom}) {
 	console.log(input);
 	return(
 		<Checkbox label={label}
 			checked={input.value ? true : false}
+			onCheck={input.onChange}
 			/>
 	)
 }
@@ -32,18 +33,17 @@ renderCheckbox ({ input, label, ...custom }) {
 		const props = this.props.config.props;
 		const config = this.props.config.config;
 		const options = this.props.config.options;
-		const checkboxes = [];
-		console.log(this.props.config);
-		options.map((v,k) => {
-			checkboxes.push(<Field name={v.value} key={k} component={this.renderCheckbox} label={v.value}/>)
-		})
+		// const checkboxes = [];
+		// options.map((v,k) => {
+		// 	checkboxes.push(<Field name={v.value} key={k} component={this.renderCheckbox} value={v.selected} onChange={this.handleCheck} label={v.value}/>)
+		// })
 
 		return(
 			<div>
 				<div className="lable-text">{props.title}</div>
 				<span className="hint-text">{props.helpText}</span>
 				<br/><br/>
-				{checkboxes}
+				<Field name={props.name} component={this.renderCheckbox} label={options.value}/>
 			</div>
 		)
 	}
