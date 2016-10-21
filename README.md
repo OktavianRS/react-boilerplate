@@ -18,6 +18,3 @@ Simple React template with login form.
 3 Run `npm start` to start the local web server.
 
 4 Go to http://localhost:3000 and you should see the app running!
-
-# Author
-Template based on https://github.com/mxstbr/login-flow repository
